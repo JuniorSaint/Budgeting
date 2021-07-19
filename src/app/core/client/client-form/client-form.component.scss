@@ -1,0 +1,100 @@
+@import "../../../shared/style/variable";
+@import "../../../shared/style/button";
+@import "../../../shared/style/mixins";
+@import "../../../shared/style/reset";
+
+#main-div {
+  margin: auto;
+  max-width: 900px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  #main-card {
+    form {
+      label {
+        padding: 0 20px;
+      }
+      #first-section {
+        @extend %flex-complete;
+        input {
+          @extend %input-stander;
+        }
+        #name {
+          width: 350px;
+        }
+        #email {
+          width: 250px;
+        }
+        #social {
+          width: 250px;
+        }
+      }
+      #phone-section {
+        #list-phone {
+          @extend %flex-complete;
+          margin-top: 20px;
+          input,
+          p-dropdown {
+            @extend %input-stander;
+            padding: 10px;
+          }
+          #btn-phone {
+            @extend %flex-complete;
+          }
+          #phone {
+            @extend %input-stander;
+            width: 350px;
+          }
+          #phoneType {
+            @extend %input-stander;
+            width: 300px;
+          }
+          #btn-phone {
+            #btn-apagar-phone {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+      #address-section {
+        #address-first-line {
+          @extend %flex-complete;
+          margin-top: 20px;
+          #street {
+            @extend %input-stander;
+            width: 350px;
+          }
+          #district {
+            @extend %input-stander;
+            width: 250px;
+          }
+          #complement {
+            @extend %input-stander;
+            width: 200px;
+          }
+        }
+        #address-second-line {
+          @extend %flex-complete;
+          margin: 20px;
+          #city {
+            @extend %input-stander;
+            width: 350px;
+          }
+          #zipCode {
+            @extend %input-stander;
+            width: 250px;
+          }
+          #UF {
+            @extend %input-stander;
+            width: 200px;
+          }
+        }
+      }
+      #note-section {
+        width: 900px;
+        #note {
+          width: 95%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,263 @@
+<main>
+    <p-card id="main-card">
+        <ng-template pTemplate="header">
+            <div id="header-card">
+                <div>
+                    <p id="p-title">Orçamento de prestação de serviços</p>
+                </div>
+            </div>
+        </ng-template>
+        <form [formGroup]="formulario">
+            <div id="first-line">
+                <mat-form-field id="client-select" appearance="outline">
+                    <mat-label>Cliente</mat-label>
+                    <mat-select
+                        formControlName="_idClient"
+                        (ngModelChange)="clientBudgeting()"
+                    >
+                        <mat-option
+                            *ngFor="let item of clients$"
+                            value="{{ item._id }}"
+                            >{{ item.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="date-budgeting" appearance="outline">
+                    <mat-label>Data Entrada</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="dateEnter"
+                        id="dateEnter"
+                        formControlName="dateEnter"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="dateEnter"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #dateEnter></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="date-budgeting" appearance="outline">
+                    <mat-label>Previsão de Entrega</mat-label>
+                    <input
+                        matInput
+                        [matDatepicker]="picker"
+                        id="DateDelivery"
+                        formControlName="DateDelivery"
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <mat-divider></mat-divider>
+            <!-- complete data from client  -->
+            <div>
+                <ng-container *ngIf="client$">
+                    <div id="address-client">
+                        <div class="p-grid">
+                            <div class="p-col">
+                                <div class="box">
+                                    <p>Endereço</p>
+                                    {{ client$.address?.street }} -
+                                    {{ client$.address?.district }} <br />
+                                    {{ client$.address?.city }} -
+                                    {{ client$.address?.UF }} -
+                                    {{ client$.address?.zipCode }}
+                                </div>
+                            </div>
+                            <div class="p-col">
+                                <p>Telefone</p>
+                                <div
+                                    class="box"
+                                    *ngFor="let tel of client$?.phone"
+                                >
+                                    {{ tel?.phoneNumber }} - {{ tel?.social }}
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p-divider></p-divider>
+                </ng-container>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <!--  lista de serviços  -->
+            <p-card id="list-service">
+                <div formArrayName="service">
+                    <div id="list-service-header" style="margin-bottom: 20px">
+                        Relação de Serviços
+                    </div>
+                    <div
+                        id="for-div"
+                        *ngFor="
+                            let forServico of ServiceFormControl.controls;
+                            let i = index
+                        "
+                        [formGroupName]="i"
+                    >
+                        <div
+                            class="
+                                p-d-flex
+                                p-flex-column
+                                p-flex-md-row
+                                p-flex-wrap
+                                p-jc-between
+                                p-ai-center
+                            "
+                        >
+                            <p-inputNumber
+                                class="amount"
+                                placeholder="Qtd."
+                                inputId="integeronly"
+                                id="amount"
+                                formControlName="amount"
+                                (onBlur)="totalUnitario()"
+                            >
+                            </p-inputNumber>
+
+                            <p-dropdown
+                                [options]="typeServices$"
+                                formControlName="typeService"
+                                optionValue="typeService"
+                                optionLabel="typeService"
+                                [style]="{ minWidth: '14rem' }"
+                            ></p-dropdown>
+
+                            <p-inputNumber
+                                matInput
+                                class="currency-value"
+                                type="number"
+                                formControlName="valueUnit"
+                                (onBlur)="totalUnitario()"
+                                mode="currency"
+                                currency="BRL"
+                                locale="pt-BR"
+                            >
+                            </p-inputNumber>
+
+                            <input
+                                type="text"
+                                readonly
+                                formControlName="valueAmount"
+                                phoneFormControl.controls.
+                            />
+
+                            <div style="width: 90px">
+                                <button
+                                    (click)="adcionarServico()"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-tags"
+                                    class="p-button-rounded"
+                                ></button>
+
+                                <button
+                                    style="margin-left: 10px"
+                                    (click)="removerServico(i)"
+                                    *ngIf="ServiceFormControl.length > 1"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-trash"
+                                    class="p-button-rounded p-button-danger"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>Subtotal teste {{ valueTotalUnit | currency: 'BRL' }}</div>
+            </p-card>
+            <section id="section-value">
+                <div id="value-add-div">
+                    <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                    >
+                        <mat-label>ISS</mat-label>
+                        <input
+                            matInput
+                            (blur)="totalGeral()"
+                            currencyMask
+                            formControlName="valueISS"
+                            [options]="{
+                                prefix: 'R$ ',
+                                thousands: '.',
+                                decimal: ','
+                            }"
+                        />
+                    </mat-form-field>
+                    <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                    >
+                        <mat-label>Adicionais</mat-label>
+                        <input
+                            matInput
+                            (blur)="totalGeral()"
+                            currencyMask
+                            formControlName="extraValue"
+                            [options]="{
+                                prefix: 'R$ ',
+                                thousands: '.',
+                                decimal: ','
+                            }"
+                        />
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Total Geral</mat-label>
+                    <input
+                        matInput
+                        (blur)="totalGeral()"
+                        currencyMask
+                        formControlName="valueTotal"
+                        [options]="{
+                            prefix: 'R$ ',
+                            thousands: '.',
+                            decimal: ','
+                        }"
+                    />
+                </mat-form-field>
+            </section>
+            <section id="section-textarea">
+                <textarea
+                    id="text-area-form"
+                    rows="5"
+                    cols="30"
+                    pInputTextarea
+                ></textarea>
+            </section>
+        </form>
+        <!-- botoes do radapé  -->
+        <div id="btn-action">
+            <button
+                (click)="onSubmit()"
+                pTooltip="Salvar documento"
+                [disabled]="formulario.invalid"
+                icon="pi pi-save"
+                class="btn-save"
+            >
+                {{ txtBtn }}
+            </button>
+
+            <button
+                class="btn-return"
+                (click)="btnVoltar()"
+                pTooltip="Volta a lista"
+                icon="pi pi-backward"
+                id="btn-voltar"
+            >
+                Voltar
+            </button>
+        </div>
+    </p-card>
+</main>
+{{ formulario.value | json }}

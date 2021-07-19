@@ -1,0 +1,85 @@
+@import '../../../shared/style/variable';
+@import '../../../shared/style/button';
+@import '../../../shared/style/mixins';
+@import '../../../shared/style/reset';
+
+main {
+    width: 900px;
+    margin: auto;
+    margin-top: 30px;
+    .inputNumber {
+        width: 150px;
+        height: 90px;
+    }
+
+    #main-card {
+        label {
+            padding-left: 10px;
+        }
+        #header-card {
+            @extend %header-card;
+            justify-content: center;
+        }
+        #first-line {
+            @extend %flex-complete;
+            margin-bottom: 15px;
+            #client-select {
+                width: 350px;
+            }
+            .date-budgeting {
+                width: 180px;
+            }
+        }
+        #list-service {
+            #list-service-header {
+                display: flex;
+                justify-content: center;
+            }
+            #for-div {
+                margin-bottom: 5px;
+            }
+        }
+        #section-value {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            #value-add-div {
+                #value-add {
+                    margin-left: 10px;
+                }
+            }
+        }
+        #section-textarea {
+            #text-area-form {
+                width: 100%;
+            }
+        }
+        #text-area-form {
+            width: 300px;
+        }
+        #total-values {
+            @extend %flex-complete;
+            margin-top: 20px;
+        }
+        #budgeting-note {
+            #note {
+                width: 100%;
+            }
+        }
+    }
+}
+
+:host ::ng-deep #amount {
+    input {
+        width: 50px;
+    }
+}
+
+:host ::ng-deep .currency-value {
+    input {
+        width: 150px;
+    }
+}

@@ -1,0 +1,29 @@
+@import "../../../shared/style/variable";
+@import "../../../shared/style/button";
+@import "../../../shared/style/mixins";
+@import "../../../shared/style/reset";
+
+main {
+  margin: auto;
+  margin-top: 50;
+  #main-div {
+    width: 900px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    #main-card {
+      #header-card {
+        @extend %header-card;
+      }
+    }
+  }
+  #input-div {
+      @extend %flex-complete;
+      label{
+          padding-left: 10px
+      }
+    input {
+      @extend %input-stander;
+    }
+  }
+}

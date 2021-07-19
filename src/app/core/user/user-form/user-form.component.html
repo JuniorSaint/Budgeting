@@ -1,0 +1,85 @@
+<main>
+  <div id="container">
+    <form [formGroup]="formulario">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div id="header-card">
+            <div>
+              <p id="p-title">{{ pageTitle }}</p>
+            </div>
+            <div>
+
+            </div>
+          </div>
+        </ng-template>
+
+
+        <div id="form-first-line" class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="name">Nome</label>
+            <input id="name" type="text" pInputText formControlName="name">
+          </div>
+          <div class="p-field p-col">
+            <label for="email">Email</label>
+            <input id="email" type="text" pInputText formControlName="email">
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="password">Senha</label>
+            <p-password id="password" formControlName="password" [toggleMask]="true"></p-password>
+          </div>
+          <div class="p-field p-col">
+            <label for="repPassword">Confirmação da Senha</label>
+            <p-password id="repPassword" formControlName="repPassword" [toggleMask]="true"></p-password>
+          </div>
+        </div>
+
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="password">Qual o tipo de usuário</label>
+            <p-dropdown
+              [options]="typeUser"
+              placeholder="Selecione o tipo"
+              optionLabel="tipU"
+              optionValue="value"
+              [showClear]="true"
+              formControlName="userKind">
+            </p-dropdown>
+          </div>
+          <div class="p-field p-col">
+            <label for="password">Usuário esta ativo</label>
+            <p-dropdown
+              [options]="activeUser"
+              placeholder="Usuário Ativo"
+              formControlName="active"
+              optionLabel="acUser"
+              [showClear]="true"
+              optionValue="value">
+            </p-dropdown>
+          </div>
+        </div>
+        <ng-template pTemplate="footer">
+          <button
+            class="btn-save"
+            (click)="onSubmit()"
+            pTooltip="Salvar documento"
+            [disabled]="formulario.invalid"
+            icon="pi pi-save">
+            {{ txtBtn }}
+          </button>
+
+          <button
+            class="btn-return"
+            (click)="btnVoltar()"
+            id="btn-voltar"
+            pTooltip="Volta a lista"
+            icon="pi pi-backward">
+            Voltar
+          </button>
+        </ng-template>
+      </p-card>
+    </form>
+  </div>
+</main>

@@ -1,0 +1,34 @@
+
+#corpoDialogo{
+    padding-top: 2rem ;
+}
+
+#rodape{
+    padding-top: 2rem;
+}
+
+button {
+    background-color: #0ad4db;
+    border-radius: 20px;
+}
+
+button:hover{
+    background-color: #09b0b6;
+    transition-property: all;
+    transition: 0.5s;
+}
+
+#rodape {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+p {
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: whitesmoke;
+    letter-spacing: 2px;
+    line-height: 1.5;
+} 
+

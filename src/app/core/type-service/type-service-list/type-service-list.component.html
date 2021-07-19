@@ -1,0 +1,50 @@
+<main>
+
+      <div id="header-card">
+        <div>
+          <p id="p-title">Lista dos serviços</p>
+        </div>
+        <div>
+
+        </div>
+      </div>
+
+  <p-table [value]="dataSource$">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Tipo</th>
+        <th>Descrição</th>
+        <th>Ação</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.typeService}}</td>
+        <td>{{product.descriptionService}}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-pencil"
+            (click)="editForm(product._id)"
+            class="p-button-rounded p-button-success"
+            pTooltip="Editar formulário"
+            style="background-color: #33F5FF; color: black;">
+          </button>
+
+          <button
+            pButton
+            (click)="delete(product._id)"
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-danger"
+            style="margin-left: 5px;"
+            pTooltip="Apagar formulário">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</main>

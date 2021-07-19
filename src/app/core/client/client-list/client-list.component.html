@@ -1,0 +1,56 @@
+<div id="main-div">
+    <p-card>
+        <ng-template pTemplate="header">
+            <div id="header-card">
+                <div>
+                    <p id="p-title">Lista de clientes</p>
+                </div>
+                <div>
+                    <button                        
+                        pButton
+                        type="button"
+                        (click)="novo()"
+                        label="Novo"
+                        icon="pi pi-plus"
+                        class="btn-create"
+                        pTooltip="Criar novo formulário">
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+        <div>
+            <p-accordion *ngFor="let item of dataSource$">
+                <p-accordionTab header="{{ item.name }}">
+                    {{ item.email }}
+                    <div *ngFor="let itemPhone of item.phone">
+                        {{ itemPhone.phoneNumber | mask:'(000) 00000-0000' }}
+                    </div>
+                    <br>
+                    <ng-template pTemplate="footer">
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-pencil"
+                            (click)="edit(item._id)"
+                            class="p-button-rounded p-button-success"
+                            pTooltip="Editar formulário"
+                            style="background-color: #33F5FF; color: black;">
+                        </button>
+
+                        <button
+                            pButton
+                            (click)="delete(item._id)"
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger"
+                            style="margin-left: 5px;"
+                            pTooltip="Apagar formulário">
+                        </button>
+                    </ng-template>
+                </p-accordionTab>
+            </p-accordion>
+        </div>
+    </p-card>
+</div>

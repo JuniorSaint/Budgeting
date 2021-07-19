@@ -1,0 +1,14 @@
+@import "../../../shared/style/variable";
+@import "../../../shared/style/button";
+@import "../../../shared/style/mixins";
+@import "../../../shared/style/reset";
+
+#main-div{
+  max-width: 900px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  #header-card{
+    @extend %header-card;
+  }
+}

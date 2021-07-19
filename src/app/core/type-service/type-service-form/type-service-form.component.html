@@ -1,0 +1,68 @@
+<main>
+    <div id="main-div">
+        <p-card id="main-card">
+            <form [formGroup]="formulario">
+                <p-card>
+                    <ng-template pTemplate="header">
+                        <div id="header-card">
+                            <div>
+                                <p id="p-title">{{ pageTitle }}</p>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    <div id="input-div">
+
+                        <span class="p-float-label">
+                            <input
+                                id="name"
+                                type="text"
+                                pInputText
+                                formControlName="typeService"
+                                class="p-mr-3">
+                            <label for="name">Tipo de Serviço</label>
+                        </span>
+
+                        <span class="p-float-label">
+                            <input
+                                id="name"
+                                type="text"
+                                pInputText
+                                formControlName="descriptionService"
+                                class="p-mr-3">
+                            <label for="name">Tipo de Serviço</label>
+                        </span>
+
+                        <div>
+                            <button
+                                class="btn-save"
+                                pButton
+                                pRipple
+                                [disabled]="formulario.invalid"
+                                (click)="onSubmit()"
+                                type="button"
+                                label="{{ txtBtn }}">
+                            </button>
+                            <button
+                                class="btn-return"
+                                pButton
+                                pRipple
+                                (click)="clearFields()"
+                                type="button"
+                                label="Limpar">
+                            </button>
+                        </div>
+                    </div>
+                </p-card>
+            </form>
+            <div style="margin-top: 10px;">
+                <p-card>
+                    <app-type-service-list></app-type-service-list>
+                </p-card>
+            </div>
+        </p-card>
+    </div>
+</main>

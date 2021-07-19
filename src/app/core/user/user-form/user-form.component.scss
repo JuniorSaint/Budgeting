@@ -1,0 +1,27 @@
+@import "../../../shared/style/variable";
+@import "../../../shared/style/button";
+@import "../../../shared/style/mixins";
+@import "../../../shared/style/reset";
+
+
+
+main{
+  #container {
+    width: 900px;
+    margin: auto;
+    margin-top: 30px;
+    #header-card{
+      @extend %header-card;
+    }
+    #form-first-line{
+      input{
+        height: 40px;
+      }
+    }
+  }
+
+}
+
+
+
+

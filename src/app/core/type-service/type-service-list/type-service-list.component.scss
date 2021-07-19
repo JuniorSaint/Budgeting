@@ -1,0 +1,16 @@
+@import "../../../shared/style/variable";
+@import "../../../shared/style/button";
+@import "../../../shared/style/mixins";
+@import "../../../shared/style/reset";
+
+
+table {
+    width: 100%;
+  }
+
+  main{
+    #header-card{
+      @extend %header-card;
+      margin-bottom: 10px;
+    }
+  }

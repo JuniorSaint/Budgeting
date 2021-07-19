@@ -1,0 +1,208 @@
+<div id="main-div">
+  <p-card id="main-card">
+    <form [formGroup]="formulario">
+      <section id="first-section">
+        <span class="p-float-label">
+          <input
+            id="name"
+            type="text"
+            pInputText
+            formControlName="name"
+            class="p-mr-3">
+          <label for="name">Cliente</label>
+        </span>
+
+        <span class="p-float-label">
+          <input
+            id="email"
+            type="text"
+            formControlName="email"
+            pInputText>
+          <label for="email">Email</label>
+        </span>
+
+        <span class="p-float-label">
+          <input
+            id="cpf"
+            mask="000.000.000-00||00.000.000/0000-00"
+            type="text"
+            formControlName="cpf"
+            pInputText>
+          <label for="cpf">CPF</label>
+        </span>
+      </section>
+
+      <p-divider></p-divider>
+
+      <!-- Lista de Telefones  -->
+      <section formArrayName="phone" id="phone-section">
+        <h3>Telefone</h3>
+        <div
+          *ngFor="let forServico of phoneFormControl.controls;
+          let i = index"
+          [formGroupName]="i"
+          id="list-phone">
+
+          <span class="p-float-label">
+            <input
+              id="phone"
+              mask="(000) 0000-0000 || (000) 00000-0000"
+              formControlName="phoneNumber"
+              type="text"
+              pInputText>
+            <label for="phone">Número</label>
+          </span>
+
+          <span class="p-float-label">
+            <p-dropdown
+              id="phoneType"
+              inputId="phoneType"
+              [options]="phoneType"
+              formControlName="phoneType"
+              optionValue="value"
+              placeholder="Tipo de telefone"
+              optionLabel="name">
+            </p-dropdown>
+          </span>
+
+          <span class="p-float-label">
+            <p-dropdown
+              id="social"
+              inputId="social"
+              [options]="social"
+              formControlName="social"
+              placeholder="Social"
+              optionValue="value"
+              optionLabel="name">
+            </p-dropdown>
+          </span>
+
+          <div id="btn-phone">
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-plus"
+              class="p-button-rounded p-button-success btn-tel"
+              (click)="newPhone()"
+              pTooltip="Adicione novo número">
+            </button>
+
+            <button
+              id="btn-apagar-phone"
+              pButton
+              pRipple
+              type="button"
+              (click)="removeTelefone(i)"
+              pTooltip="Apaga o telefone"
+              *ngIf="phoneFormControl.length > 1" icon="pi pi-trash"
+              class="p-button-rounded p-button-danger btn-tel">
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <p-divider></p-divider>
+
+      <!-- Parte do cadastramento do endereço  -->
+      <section id="address-section">
+        <h3>Endereço</h3>
+        <div formGroupName="address">
+          <div id="address-first-line">
+            <span class="p-float-label input-stander">
+              <input
+                id="street"
+                formControlName="street"
+                type="text"
+                pInputText>
+              <label for="phone">Rua/Ave</label>
+            </span>
+
+            <span class="p-float-label input-stander">
+              <input
+                id="district"
+                formControlName="district"
+                type="text"
+                pInputText>
+              <label for="phone">Bairro</label>
+            </span>
+
+            <span class="p-float-label input-stander">
+              <input
+                id="complement"
+                formControlName="complement"
+                type="text"
+                pInputText>
+              <label for="phone">Complemento</label>
+            </span>
+          </div>
+
+          <div id="address-second-line">
+            <span class="p-float-label input-stander">
+              <input
+                id="city"
+                formControlName="city"
+                type="text"
+                pInputText>
+              <label for="phone">Cidade</label>
+            </span>
+
+            <span class="p-float-label input-stander">
+              <input
+                id="zipCode"
+                type="text"
+                formControlName="zipCode"
+                mask="00.000-000"
+                pInputText>
+              <label for="phone">Cep</label>
+            </span>
+
+
+              <p-dropdown
+                inputId="UF"
+                formControlName="UF"
+                [options]="UF"
+                placeholder="Estado"
+                optionValue="sigla"
+                optionLabel="sigla">
+              </p-dropdown>
+
+          </div>
+        </div>
+      </section>
+
+      <p-divider></p-divider>
+      <!-- Campo Observação  -->
+      <section id="note-section">
+        <h5>Observação</h5>
+        <textarea
+          id="note"
+          type="text"
+          rows="2"
+          formControlName="note"
+          pInputTextarea></textarea>
+      </section>
+    </form>
+
+    <!-- botoes do radapé  -->
+    <ng-template pTemplate="footer">
+      <button
+        (click)="onSubmit()"
+        pTooltip="Salvar documento"
+        [disabled]="formulario.invalid"
+        icon="pi pi-save"
+        class="btn-save">
+        {{ txtBtn }}
+      </button>
+
+      <button
+        class="btn-return"
+        (click)="btnVoltar()"
+        pTooltip="Volta a lista"
+        icon="pi pi-backward"
+        id="btn-voltar">
+        Voltar
+      </button>
+    </ng-template>
+  </p-card>
+</div>
